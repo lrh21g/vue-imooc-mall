@@ -1,4 +1,5 @@
 const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -10,10 +11,13 @@ module.exports = {
   assetsDir: 'static',
   chainWebpack (config) {
     config.resolve.alias
-      .set('components', resolve('src/components'))
-      .set('common', resolve('src/common'))
-      .set('api', resolve('src/api'))
-      .set('views', resolve('src/views'))
-      .set('assets', resolve('src/assets'))
+      .set('@', resolve('src'))
+  },
+  devServer: {
+    proxy: {
+      '/goods': {
+        target: 'http://localhost:3000'
+      }
+    }
   }
 }

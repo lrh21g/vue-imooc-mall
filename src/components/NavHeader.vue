@@ -10,7 +10,7 @@
     <div class="navbar">
       <div class="navbar-left-container">
         <a href="/">
-          <img class="navbar-brand-logo" src="~assets/img/logo.png"></a>
+          <img class="navbar-brand-logo" src="/images/logo.png"></a>
       </div>
       <div class="navbar-right-container" style="display: flex;">
         <div class="navbar-menu-container">
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import 'assets/stylus/login.styl'
+  import '@/assets/stylus/login.styl'
   export default {}
 
 </script>

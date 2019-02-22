@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import NavHeader from 'components/NavHeader'
-  import NavFooter from 'components/NavFooter'
+  import NavHeader from '@/components/NavHeader'
+  import NavFooter from '@/components/NavFooter'
 
   export default {
     components: {

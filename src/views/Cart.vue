@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  import NavHeader from 'components/NavHeader'
-  import NavFooter from 'components/NavFooter'
-  import NavBread from 'components/NavBread'
+  import NavHeader from '@/components/NavHeader'
+  import NavFooter from '@/components/NavFooter'
+  import NavBread from '@/components/NavBread'
 
   export default {
     components: {

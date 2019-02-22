@@ -6,6 +6,7 @@ var logger = require('morgan'); // morgan 是 Express 默认的日志中间件�
 var ejs = require('ejs')
 
 var indexRouter = require('./routes/index'); // index 路由
+var goodsRouter = require('./routes/goods'); // goods 路由
 var usersRouter = require('./routes/users'); // users 路由
 
 var app = express(); // 创建一个 express 实例
@@ -30,7 +31,9 @@ app.use(cookieParser()); // 用来实现cookie的解析
 // 所有的请求通过这个中间件，如果没有文件被找到的话会继续前进
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter); // 为指定的路径指定中间件函数，当请求的路径与之匹配时，中间件函数将会被执行
+// 一级路由
+app.use('/', indexRouter); // 为指定的路径指定中间件函数，当请求的路径与之匹配时，中间件函数将会被执行。
+app.use('/goods', goodsRouter)
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
