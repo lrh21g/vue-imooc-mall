@@ -54,7 +54,6 @@ router.get("/", function (req, res, next) {
   // > 第三个参数用于配置查询参数，
   // > 第四个参数是回调函数，
   // > 回调函数的形式为 function(err,docs) {}
-  console.log('params', params)
   let goodsModel = Goods.find(params).skip(skip).limit(pageSize); // 实现分页功能
   // Goods.find(params): 查询所有数据符合筛选条件的数据
   // skip(skip) 跳过 skip 个，显示其他
