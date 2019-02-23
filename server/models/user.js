@@ -6,24 +6,34 @@ var mongoose = require('mongoose');
 // > 每个 schema 会映射到 mongodb 中的一个 collection，schema不具备操作数据库的能力
 // 使用：通过 mongoose.Schema 来调用 Schema，然后使用 new方法 来创建 schema
 var Schema = mongoose.Schema;
-var productSchema = new Schema({
-  'productId':String, // 商品id。（或者可以使用 'productId':{type:String}）
-	'productName':String, // 商品名
-	'salePrice':Number, // 商品价格
-  'productImage':String, // 商品图片
-
-  // 在商品列表页，对相应商品点击加入购车时，会获取对应商品数据，
-  // 然后给该商品添加 checked 和 productNum 属性，
-  // 再将该商品添加到购物车列表中，Schema中不定义属性的话是添加不了的
-  "checked":String, // 商品是否选中
-  "productNum":Number // 商品数量
+var userSchema = new Schema({
+  'userId': String, // 用户ID(或者 'userId':{type:String})
+  'userName': String, // 用户名
+  'userPwd': String, // 用户密码
+  'orderList': Array, // 订单列表
+  'cartList': [{ // 购物车列表
+    "productId": String, // 商品ID
+    "productName": String, // 商品名
+    "salePrice": Number, // 商品价格
+    "productImage": String, // 商品图片
+    "checked": String, // 商品是否选中
+    "productNum": String // 商品数量
+  }],
+  "addressList": [{ // 地址列表
+    "addressId": String, // 地址ID
+    "userName": String, // 收货人
+    "streetName": String, // 地址
+    "postCode": Number, // 邮编
+    "tel": Number, // 电话
+    "isDefault": Boolean // 是否默认选择
+  }]
 })
 
 // Model是由 Schema 编译而成的假想（fancy）构造器，具有抽象属性和行为。
 // Model的每一个实例（instance）就是一个document，document可以保存到数据库和对数据库进行操作。
 // 简单说就是：Model是由 Schema 生成的模型，可以对数据库的操作。使用 model() 方法，将 Schema 编译为 Model
 // 使用：mongoose.model(`文档名称`, Schema)
-module.exports = mongoose.model('good', productSchema) // // 输出(导出)
+module.exports = mongoose.model('user', userSchema) // // 输出(导出)
 // Mongoose 会将集合名称设置为模型名称的小写版。
 // > 如果名称的最后一个字符是【字母】，则会变成复数； -->  如果模型名称为 "MyModel"，则集合名称为 "mymodels"
 // > 如果名称的最后一个字符是【数字】，则不变；  -->  如果模型名称为 "Model1"，则集合名称为 "model1"

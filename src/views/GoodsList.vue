@@ -150,7 +150,7 @@
           priceLevel: this.priceChecked // 价格区间标识
         }
         this.loading = true // 显示加载loading
-        axios.get('/goods', {
+        axios.get('/goods/list', {
           params: param
         }).then((response) => {
           var res = response.data
@@ -208,6 +208,21 @@
       showFilterPop () {
         this.filterBy = true // 显示价格筛选菜单
         this.overLayFlag = true // 显示遮罩层
+      },
+      // 加入购物车
+      addCart (productId) {
+        axios.post('/goods/addCart', {
+          productId: productId
+        }).then((response) => {
+          var res = response.data
+          if (res.status === '0') {
+            // 加入购物车成功，显示加入成功提示框以及更新购物车数量显示
+            this.mdShowCart = true
+            this.$store.commit('updateCartCount', 1)
+          } else {
+            this.mdShow = true // 显示未登录提示框
+          }
+        })
       }
     },
     components: {
