@@ -13,9 +13,11 @@ export default new Vuex.Store({
     updateUserInfo(state, nickName) {
       state.nickName = nickName
     },
+    // 更新购物车数量
     updateCartCount(state, cartCount) {
       state.cartCount += cartCount
     },
+    // 初始化购物出数量
     initCartCount(state, cartCount) {
       state.cartCount = cartCount
     }

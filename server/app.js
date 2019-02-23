@@ -31,6 +31,32 @@ app.use(cookieParser()); // 用来实现cookie的解析
 // 所有的请求通过这个中间件，如果没有文件被找到的话会继续前进
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 捕获登陆状态
+app.use(function (req, res, next) {
+  // 引用cookie-parser 中间件：var cookieParser = require('cookie-parser')
+  // req.cookies：当使用 cookie-parser 中间件时，此属性是一个由请求中的 cookie 信息构建的对象。如果请求中没有cookie，其值为 {}
+  // 如果 cookie 有签名，则需要使用 req.signedCookies
+  if (req.cookies.userId) {
+    next();
+  } else {
+    // req.originalUrl：在中间件函数中，req.originalUrl 是 req.baseUrl 和 req.path 的组合
+    // 示例：GET 'http://www.example.com/admin/new'
+    // req.originalUrl --> '/admin/new'
+    // req.baseUrl --> '/admin'
+    // req.path --> '/new'
+    if (req.originalUrl == '/users/login' || req.originalUrl == 'users/logout' || req.originalUrl.indexOf('goods/list') > -1) {
+      // 未登录时可以点击 登录login、登出logout 和 查看商品列表
+      next();
+    } else {
+      res.json({
+        status: '1001',
+        msg: '当前未登录',
+        result: ''
+      })
+    }
+  }
+})
+
 // 一级路由
 app.use('/', indexRouter); // 为指定的路径指定中间件函数，当请求的路径与之匹配时，中间件函数将会被执行。
 app.use('/goods', goodsRouter)
