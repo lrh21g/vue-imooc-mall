@@ -224,6 +224,7 @@ router.get('/getCartCount', function (req, res, next) {
       } else {
         let cartList = doc.cartList;
         let cartCount = 0;
+        // map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
         cartList.map(function (item) {
           cartCount += parseFloat(item.productNum);
         });
