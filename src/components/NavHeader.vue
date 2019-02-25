@@ -75,8 +75,8 @@
   export default {
     data () {
       return {
-        userName: '', // 用户名
-        userPwd: '', // 用户密码
+        userName: 'admin', // 用户名
+        userPwd: '123456', // 用户密码
         errorTip: false, // 用户控制登陆弹窗，显示错误信息
         loginModalFlag: false // 用于控制是否显示遮罩层
       }
@@ -96,7 +96,10 @@
             if (res.status === '0') {
               this.$store.commit('updateUserInfo', res.result) // updateUserInfo 更新用户信息
               this.loginModalFlag = false // 隐藏遮罩层
-              this.getCartCount() // 获取购物车商品数量
+            } else {
+              if (this.$router.path !== '/goods') {
+                this.$router.push('/goods')
+              }
             }
           })
       },
@@ -127,6 +130,7 @@
             let res = response.data
             if (res.status === '0') {
               this.$store.commit('updateUserInfo', res.result.userName) // 更新用户信息
+              this.$store.commit('initCartCount', 0)
             }
           })
       },

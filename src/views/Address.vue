@@ -113,6 +113,14 @@
         <a class="btn btn--m btn--red" href="javascript:;" @click="isMdShow=false">取消</a>
       </div>
     </modal>
+    <modal :mdShow="isMdShow2" @close="isMdShow2 = false">
+      <p slot="message">
+        地址列表至少需要存在一条数据，已无法继续删除。
+      </p>
+      <div slot="btnGroup">
+        <a class="btn btn--m" href="javascript:;" @click="isMdShow2 = false">好的</a>
+      </div>
+    </modal>
 
     <!-- 底部组件 -->
     <nav-footer></nav-footer>
@@ -169,6 +177,7 @@
         limit: 3, // 用于限制地址显示个数
         checkIndex: 0, // 选中地址的索引index
         isMdShow: false, // 用于控制提示框弹窗的显示与隐藏
+        isMdShow2: false, // 用于控制地址删除到最后一条，提示无法删除
         addressId: '', // 选中的地址ID，用于设置默认地址，删除地址
         selectedAddrId: '' // 选中的地址ID，用于进行next操作
       }
@@ -217,8 +226,12 @@
       },
       // 删除操作 - 打开删除提示框
       delAddressConfirm (addressId) {
-        this.isMdShow = true
-        this.addressId = addressId
+        if (this.addressList.length > 1) {
+          this.isMdShow = true
+          this.addressId = addressId
+        } else {
+          this.isMdShow2 = true
+        }
       },
       // 删除操作 - 删除提示框，确认删除操作
       delAddress () {

@@ -7,8 +7,9 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'GoodList',
-      component: () => import('@/views/GoodsList')
+      redirect: {
+        name: 'GoodList'
+      }
     },
     {
       path: '/goods',
