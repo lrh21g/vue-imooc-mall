@@ -17,7 +17,7 @@
           <ul>
             <li class="cur"><span>Confirm</span> address</li>
             <li class="cur"><span>View your</span> order</li>
-            <li><span>Make</span> payment</li>
+            <li class="cur"><span>Make</span> payment</li>
             <li><span>Order</span> confirmation</li>
           </ul>
         </div>
