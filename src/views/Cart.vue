@@ -3,7 +3,9 @@
     <!-- 头部组件 -->
     <nav-header></nav-header>
     <!-- 面包屑导航组件 -->
-    <nav-bread></nav-bread>
+    <nav-bread>
+      <span>My Cart</span>
+    </nav-bread>
     <!-- 主体内容 -->
     <div class="container">
       <div class="cart">
