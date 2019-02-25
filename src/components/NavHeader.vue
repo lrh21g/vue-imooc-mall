@@ -53,7 +53,7 @@
               <li class="regi_form_input noMargin">
                 <i class="icon IconPwd"></i>
                 <input type="password" name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text"
-                  placeholder="Password" @keyup.enter="login"><!-- @keyup.enter="login"实现回车登录 -->
+                  placeholder="Password" @keyup.enter="login">
               </li>
             </ul>
           </div>
@@ -96,7 +96,7 @@
             if (res.status === '0') {
               this.$store.commit('updateUserInfo', res.result) // updateUserInfo 更新用户信息
               this.loginModalFlag = false // 隐藏遮罩层
-              // this.getCartCount() // 获取购物车商品数量
+              this.getCartCount() // 获取购物车商品数量
             }
           })
       },
@@ -116,7 +116,7 @@
             this.errorTip = false // 隐藏登陆弹窗错误信息
             this.loginModalFlag = false // 隐藏登陆弹窗
             this.$store.commit('updateUserInfo', res.result.userName) // 更新用户信息
-            // this.getCartCount() // 获取购物车商品数量
+            this.getCartCount() // 获取购物车商品数量
           }
         })
       },
@@ -128,6 +128,14 @@
             if (res.status === '0') {
               this.$store.commit('updateUserInfo', res.result.userName) // 更新用户信息
             }
+          })
+      },
+      // 获取购物车数量
+      getCartCount () {
+        axios.get('/users/getCartCount')
+          .then((response) => {
+            var res = response.data
+            this.$store.commit('initCartCount', res.result)
           })
       }
     }

@@ -98,6 +98,7 @@ router.get('/cartList', function (req, res, next) {
   })
 })
 
+// 购物车编辑：增加商品数量、减少商品数量、选择商品
 router.post('/cartEdit', function (req, res, next) {
   var userId = req.cookies.userId,
       productId = req.body.productId,
@@ -199,6 +200,41 @@ router.post('/editCheckAll', function (req, res, next) {
       }
     }
   })
+})
+
+// 获取购物车商品数量
+router.get('/getCartCount', function (req, res, next) {
+  if (req.cookies && req.cookies.userId) {
+    var userId = req.cookies.userId;
+    User.findOne({
+      'userId': userId
+    }, function (err, doc) {
+      if (err) {
+        res.json({
+          status: '1',
+          msg: err.message,
+          result: ''
+        })
+      } else {
+        let cartList = doc.cartList;
+        let cartCount = 0;
+        cartList.map(function (item) {
+          cartCount += parseFloat(item.productNum);
+        });
+        res.json({
+          status: '0',
+          msg: '',
+          result: cartCount
+        })
+      }
+    })
+  } else {
+    res.json({
+      status: '0',
+      msg: '当前用户不存在',
+      result: ''
+    })
+  }
 })
 
 // 获取地址列表接口
