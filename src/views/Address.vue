@@ -189,6 +189,7 @@
           .then((response) => {
             let res = response.data
             this.addressList = res.result
+            this.selectedAddrId = this.addressList[0].addressId
           })
       },
       // 展开更多地址，通过修改限制显示地址的个数来进行操作

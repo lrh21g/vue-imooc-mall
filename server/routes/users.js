@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js'); // 引入 User 模型
+require('./../util/util');  // 引入时间格式化函数工具
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -299,4 +300,72 @@ router.post('/delAddress', function (req, res, next) {
     }
   })
 })
+
+// payMent
+router.post('/payMent', function (req, res, next) {
+  var userId = req.cookies.userId,
+      addressId = req.body.addressId, // 订单地址ID
+      orderTotal = req.body.orderTotal; // 订单地址总金额
+  User.findOne({
+    userId: userId
+  }, function (err, doc) {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      var address = {},
+          goodsList = [];
+      // 获取当前用户地址信息
+      doc.addressList.forEach((item) => {
+        if (addressId === item.addressId) {
+          address = item;
+        }
+      })
+      // 获取当前用户购物车购买商品
+      doc.cartList.filter((item) => {
+        if (item.checked === '1') {
+          goodsList.push(item);
+        }
+      })
+      // 创建订单ID
+      var platform = '622'; // 平台系统架构码
+      var r1 = Math.floor(Math.random() * 10);
+      var r2 = Math.floor(Math.random() * 10);
+      var sysDate = new Date().Format('yyyyMMddhhmmss');
+      var orderId = platform + r1 + sysDate + r2;
+      var createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
+      var order = {
+        orderId: orderId,
+        orderTotal: orderTotal,
+        addressInfo: address,
+        goodsList: goodsList,
+        orderStatus: '1',
+        createDate: createDate
+      };
+      doc.orderList.push(order);
+      doc.save(function (saveErr, saveDoc) {
+        if (saveErr) {
+          res.json({
+            status: '1',
+            msg: saveErr.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: {
+              orderId: order.orderId,
+              orderTotal: order.orderTotal
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
 module.exports = router;

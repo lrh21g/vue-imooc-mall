@@ -13,7 +13,6 @@ const digitsRE = /(\d{3})(?=\d)/g
  * @return {[type]}          [description]
  */
 export function currency (value, currency, decimals) {
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
   value = parseFloat(value)
   if (!isFinite(value) || (!value && value !== 0)) return ''
   // isFinite() 函数用来判断被传入的参数值是否为一个【有限数值】
