@@ -96,6 +96,7 @@
             if (res.status === '0') {
               this.$store.commit('updateUserInfo', res.result) // updateUserInfo 更新用户信息
               this.loginModalFlag = false // 隐藏遮罩层
+              this.getCartCount() // 获取购物车商品数量
             } else {
               if (this.$router.path !== '/goods') {
                 this.$router.push('/goods')
