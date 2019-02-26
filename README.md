@@ -29,9 +29,10 @@
 
 ## 3. 项目备注
 
-+ pm2 启动nodeJS
-+ mongoose
-+ vue-infinite-scroll 滚动加载插件，<https://blog.csdn.net/thatway_wp/article/details/79422368>
++ [MongoDB 安装等相关操作](./readme/MongoDB/MongoDB.md)
++ Mongoose 是在 Node.js 环境下对 MongoDB 进行便捷操作的对象模型工具。Mongoose 相关操作可参考：[一篇文章带你入门 Mongoose](https://segmentfault.com/a/1190000012095054#articleHeader31)、[Mongoose 基础操作](https://blog.csdn.net/o_Mario_o/article/details/80221386)
++ vue-infinite-scroll 滚动加载插件，可以无限滚动实现加载更多。其作用：是当滚动条滚动到距离底部的指定高度时触发某个方法。API可参考 [vue滚动加载插件vue-infinite-scroll](https://blog.csdn.net/thatway_wp/article/details/79422368)
++ 使用 PM2 进行进程管理。可参考 [PM2教程](https://pm2.io/doc/zh/runtime/overview/)
 
 ## 4. 项目展示
 
