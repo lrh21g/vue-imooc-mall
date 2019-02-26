@@ -34,3 +34,9 @@
 + vue-infinite-scroll 滚动加载插件，<https://blog.csdn.net/thatway_wp/article/details/79422368>
 
 ## 4. 项目展示
+
+![home](./readme/images/home.png)
+![cart](./readme/images/cart.png)
+![address](./readme/images/address.png)
+![order](./readme/images/order.png)
+![order-confirmation](./readme/images/order-confirmation.png)
