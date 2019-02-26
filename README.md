@@ -6,7 +6,7 @@
 
 本项目前台主要通过 Vue Cli 3.0 进行脚手架搭建，项目采用了 Vue、 Vue Router、 vuex 以及 ES6语法等。通过 axios 来实现数据接收和页面渲染。
 
-本项目后台通过 Node.js 进行实现，通过 Express框架 实现后端的 REST接口，并以 json 的形式输出，并且通过 MongoDB 进行数据存储。
+本项目后台主要通过 Node.js 进行实现，通过 Express框架 实现后端的 REST接口，并以 JSON 的形式输出，并且通过 MongoDB 进行数据存储。
 
 ## 2. 如何运行
 
